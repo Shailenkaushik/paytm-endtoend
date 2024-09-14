@@ -123,7 +123,7 @@ const updateBody = zod.object({
         const { success } = updateBody.safeParse(req.body)
     if (!success) {
         res.status(411).json({
-            message: "Error while    updating information"
+            message: "Error       while    updating information"
         })
     }
     const authHeader = req.headers.authorization;
