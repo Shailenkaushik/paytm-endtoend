@@ -1,5 +1,5 @@
 const express = require('express');
-const {User}=require('../db/db.js');
+const {User,Account}=require('../db/db.js');
 const userauthmiddleware=require('../middleware/userauthmiddleware.js')
 const zod = require("zod");
 const router = express.Router();
@@ -40,6 +40,10 @@ router.post("/signup", async (req, res) => {
     })
     const userId = user._id;
 
+     const account=await Account.create({
+        userId: userId,
+        balance: Math.random()*10000
+     })
     const token = jwt.sign({
         userId
     }, JWT_SECRET);
@@ -104,9 +108,13 @@ const updateBody = zod.object({
         // req.userId = decoded.userId;
 
 
-    const respond= await User.updateOne(req.body, {
-        _id: decoded.userId
-    })
+        const respond = await User.updateOne(
+            { _id: decoded.userId }, // Filter
+            { $set: req.body }       // Update operation
+        );
+    // await User.updateOne(req.body, {
+    //     _id: decoded.userId
+    // })
 
     res.json({
         message: respond
