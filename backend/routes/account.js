@@ -13,33 +13,29 @@ const signinBody = zod.object({
 })
 router.get("/balance",async(req,res) => {
         
-    const { success } = signinBody.safeParse(req.body)
-if (!success) {
-    res.status(411).json({
-        message: "Error       while    fetching information"
-    })
-}
+
 const authHeader = req.headers.authorization;
 const token = authHeader.split(' ')[1];
    const decoded = jwt.verify(token, JWT_SECRET);
     
 
-
+   
     
     if (decoded) {
-        const userId=decoded.userId;
-        const user = await Account.findOne({
-            userId: userId
+        const account = await Account.findOne({
+            userId: decoded.userId
         });
+        
         res.json({
-            message: user
+            balance: account.balance
         })
     }
 
-
+   else{
 res.json({
     message: "cant' fetch"
 })
+   }
     
 });
 
