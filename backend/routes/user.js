@@ -1,5 +1,5 @@
 const express = require('express');
-const {User}=require('../db/db.js');
+const {User,Account}=require('../db/db.js');
 const userauthmiddleware=require('../middleware/userauthmiddleware.js')
 const zod = require("zod");
 const router = express.Router();
@@ -40,6 +40,10 @@ router.post("/signup", async (req, res) => {
     })
     const userId = user._id;
 
+     const account=await Account.create({
+        userId: userId,
+        balance: Math.random()*10000
+     })
     const token = jwt.sign({
         userId
     }, JWT_SECRET);
@@ -51,35 +55,7 @@ router.post("/signup", async (req, res) => {
 })
 
 
-// router.post('/signin',async(req,res)=>{
-//     const { success } = signinBody.safeParse(req.body)
-//     if (!success) {
-//         return res.status(411).json({
-//             message: "Incorrect inputs"
-//         })
-//     }
-//     const username=req.body.username;
-//     const password=req.body.password;
-//    await User.findOne({
-//         username:username
-//     }) .then(function(value){
-//         if(!value){
-//             res.status(403).json({
-//                 message: "Error while logging in"
-//             })
-//         }
-        
-//     })
 
-//     const token = jwt.sign({
-//         username
-//     }, JWT_SECRET);
-
-//     res.json({
-//         message: "User created successfully",
-//         token: token
-//     })
-// });
 const signinBody = zod.object({
     username: zod.string().email(),
 	password: zod.string()
@@ -132,9 +108,13 @@ const updateBody = zod.object({
         // req.userId = decoded.userId;
 
 
-    const respond= await User.updateOne(req.body, {
-        _id: decoded.userId
-    })
+        const respond = await User.updateOne(
+            { _id: decoded.userId }, // Filter
+            { $set: req.body }       // Update operation
+        );
+    // await User.updateOne(req.body, {
+    //     _id: decoded.userId
+    // })
 
     res.json({
         message: respond
