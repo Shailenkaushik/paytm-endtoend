@@ -1,9 +1,15 @@
 import React from 'react'
+import { AppBar } from '../components/AppBar'
+import { Balance } from '../components/Balance'
+import { Users } from '../components/Users'
 
-export default function Dashboard() {
+export const  Dashboard=()=> {
+  
   return (
-    <div>
-      
+    <div className=' w-11/12'>
+      <AppBar></AppBar>
+      <Balance balance={2000}></Balance>
+      <Users></Users>
     </div>
   )
 }
