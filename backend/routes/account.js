@@ -41,12 +41,19 @@ res.json({
 
 router.post("/transfer", async (req, res) => {
     const session = await mongoose.startSession();
-
+    const authHeader = req.headers.authorization;
+    const token = authHeader.split(' ')[1];
+       const decoded = jwt.verify(token, JWT_SECRET);
+        const userId= decoded.userId;
+    
+       
+        
+       
     session.startTransaction();
     const  amount = req.body.amount;
     const  to = req.body.to;
     // Fetch the accounts within the transaction
-    const account = await Account.findOne({ userId: req.body.userId }).session(session);
+    const account = await Account.findOne({ userId }).session(session);
 
     if (!account || account.balance < amount) {
         await session.abortTransaction();

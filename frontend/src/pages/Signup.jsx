@@ -32,13 +32,15 @@ import axios from 'axios';
        <InputBox label={"Password"} onChange={e=>{
         setPassword(e.target.value);
        }}  placeholder={"***"}/ >
-       <Button label={"signup"} onClick={()=>{
-        axios.post('http://localhost:3000/api/v1/user/signup',{
+       <Button label={"signup"} onClick={async()=>{
+       const response= await axios.post('http://localhost:3000/api/v1/user/signup',{
           username,
           firstName,
           lastName,
           password
         });
+        localStorage.setItem("token",response.data.token);
+        
         console.log("post successful");
        }} />
        
