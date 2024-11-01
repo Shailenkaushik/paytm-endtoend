@@ -18,7 +18,7 @@ export const  Signin=()=> {
       <InputBox label={"Password"} placeholder={""}/ >
       <Button label={"sign In"} />
       
-      <BottomWarning label={"Don't have an account?"} buttonText={"Sign Up"} to={"/signup"} ></BottomWarning>
+      <BottomWarning label={"Don't have an account?"} buttonText={"Sign please Up"} to={"/signup"} ></BottomWarning>
       
       <div>
     </div>
