@@ -12,7 +12,7 @@ export const  Signin=()=> {
 <div className='flex flex-col justify-center'>
       <div className=' rounded-lg w-80 h-max text-center bg-white p-2 px-4' >
       <Header label={"Sign In"} />
-      <SubHeading label={"Enter your credentials to access your account"} ></SubHeading>
+      <SubHeading label={"Enter your credentials to ac ok okcess your account"} ></SubHeading>
       
       <InputBox label={"Email"} placeholder={"johndoe@example.com"}/ >
       <InputBox label={"Password"} placeholder={""}/ >
