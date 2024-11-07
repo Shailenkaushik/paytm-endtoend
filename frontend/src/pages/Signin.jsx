@@ -12,13 +12,13 @@ export const  Signin=()=> {
 <div className='flex flex-col justify-center'>
       <div className=' rounded-lg w-80 h-max text-center bg-white p-2 px-4' >
       <Header label={"Sign In"} />
-      <SubHeading label={"Enter your credentials to ac ok okcess your account"} ></SubHeading>
+      <SubHeading label={"Enter your credentials to ac also its very very effeaction, tis good ok okcess your account"} ></SubHeading>
       
       <InputBox label={"Email"} placeholder={"johndoe@example.com"}/ >
       <InputBox label={"Password"} placeholder={""}/ >
       <Button label={"sign In"} />
       
-      <BottomWarning label={"Don't have an account?"} buttonText={"Sign please Up"} to={"/signup"} ></BottomWarning>
+      <BottomWarning label={"Don't hav varty goode an account?"} buttonText={"Sign please Up"} to={"/signup"} ></BottomWarning>
       
       <div>
     </div>
